@@ -1,0 +1,73 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export RUBYOPT=--encoding UTF-8
+RUBY=/usr/bin/ruby
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+
+	# Add here commands to install the package into debian/zonecheck.
+	$(RUBY) installer.rb -DCHROOT=$(CURDIR)/debian/zonecheck \
+		-DPREFIX=/usr -DETCDIR=/etc -DETCDIST= \
+		-DLIBEXEC=/usr/share -DMANDIR=/usr/share/man -DRUBY=${RUBY} \
+		common cli doc
+	# Patch the configuration file for Linux netkit ping
+	$(RUBY) -p -i \
+		-e "\$$_.gsub"\!"(/(<const\s+name\s*=\s*\"ping4\"\s+value\s*=\s*\")[^\"]*(\"\s*\/>)/, '\1ping  -n -q -w 5 -c 5 %s > /dev/null\2')" \
+		-e "\$$_.gsub"\!"(/(<const\s+name\s*=\s*\"ping6\"\s+value\s*=\s*\")[^\"]*(\"\s*\/>)/, '\1ping6 -n -q -w 5 -c 5 %s > /dev/null\2')" \
+	$(CURDIR)/debian/zonecheck/etc/zonecheck/zc.conf
+	# Add here commands to install the package into debian/zonecheck-cgi.
+	$(RUBY) installer.rb -DCHROOT=$(CURDIR)/debian/zonecheck-cgi \
+               -DPREFIX=/usr -DETCDIR=/etc -DETCDIST= \
+	       -DCGIDIR=/usr/lib/cgi-bin/ -DLIBEXEC=/usr/share \
+	       -DMANDIR=/usr/share/man -DWWWDIR=/usr/share/zonecheck-cgi \
+               -DWWWCGIDIR=/cgi-bin -DRUBY=${RUBY} \
+		cgi
+	rm -fr $(CURDIR)/debian/zonecheck-cgi/usr/share/zonecheck
+	rm -fr $(CURDIR)/debian/zonecheck/usr/share/zonecheck/zc/config
+	mv $(CURDIR)/debian/zonecheck/usr/share/zonecheck/zc/locale.rb $(CURDIR)/debian/zonecheck/usr/share/zonecheck/zc/zc-locale.rb
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs ChangeLog
+	dh_installdocs -X .created # bogus empty file should not be installed
+	dh_installdocs -p zonecheck-cgi debian/NEWS.Debian
+	dh_installexamples
+	dh_installman
+	dh_compress
+	dh_fixperms
+	dh_link
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch: build install
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

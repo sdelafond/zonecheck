@@ -1,0 +1,230 @@
+zonecheck (3.0.3-2) unstable; urgency=low
+
+  * Fix problems related to ruby 1.9, thanks to patches from Antonio
+    Terceiro <terceiro@debian.org> (Closes: #676109, #676173)
+  * Bump-up Standards revision.
+  
+ -- Sebastien Delafond <seb@debian.org>  Mon, 18 Jun 2012 15:44:33 +0200
+
+zonecheck (3.0.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #599169).
+  * Updated watch file.
+  * Bumpred-up Standards revision.
+
+ -- Sebastien Delafond <seb@debian.org>  Tue, 05 Oct 2010 11:42:10 +0200
+
+zonecheck (3.0.2-1) unstable; urgency=low
+
+  * New upstream release (Closes: #587419).
+  * Updated watch file.
+  * Bumped up Standards revision.
+
+ -- Sebastien Delafond <seb@debian.org>  Thu, 08 Jul 2010 12:55:39 +0200
+
+zonecheck (3.0.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: #586790).
+  * Migrate to 3.0(quilt) source format.
+
+ -- Sebastien Delafond <seb@debian.org>  Thu, 24 Jun 2010 11:02:25 +0200
+
+zonecheck (2.1.1-1) unstable; urgency=high
+
+  * New upstream release, that fixes XSS issue in the the CGI
+    (Closes: #583290).
+
+ -- Sebastien Delafond <seb@debian.org>  Sat, 29 May 2010 14:27:37 +0200
+
+zonecheck (2.1.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: #569566).
+  * Added watch file.
+
+ -- Sebastien Delafond <seb@debian.org>  Fri, 12 Feb 2010 14:32:14 +0100
+
+zonecheck (2.0.4+cvs20081105-1) unstable; urgency=low
+
+  * New upstream version.
+  * Bumped up Standards revision.
+  * Lintian cleanups.
+
+ -- Sebastien Delafond <seb@debian.org>  Sat, 10 Oct 2009 11:40:59 +0200
+
+zonecheck (2.0.4-13) unstable; urgency=low
+
+  * Move files away from /var/www/zonecheck, and document the changes
+    in NEWS.Debian.
+
+ -- Sebastien Delafond <seb@debian.org>  Mon, 02 Jun 2008 11:47:32 -0700
+
+zonecheck (2.0.4-12) unstable; urgency=low
+
+  * Previous change only accomplished half of the task: manually removing
+    man/zonecheck.1.new from the source tarball completes it.
+
+ -- Sebastien Delafond <seb@debian.org>  Sat, 31 May 2008 17:33:09 -0700
+
+zonecheck (2.0.4-11) unstable; urgency=low
+
+  * Lintian cleanups.
+  * Fix dpatch 40, which was writing man/zonecheck.1.new.
+
+ -- Sebastien Delafond <seb@debian.org>  Fri, 09 May 2008 16:25:06 -0700
+
+zonecheck (2.0.4-10) unstable; urgency=low
+
+  * Rename locale.rb to zc-locale.rb, so as to not shadow the module
+    provided by liblocale-ruby (Closes: #472300).
+
+ -- Sebastien Delafond <seb@debian.org>  Tue, 06 May 2008 21:06:29 -0700
+
+zonecheck (2.0.4-9) unstable; urgency=low
+
+  * Correct format for the rootservers files (Closes: #463638).
+
+ -- Sebastien Delafond <seb@debian.org>  Wed, 27 Feb 2008 16:22:28 -0800
+
+zonecheck (2.0.4-8) unstable; urgency=low
+
+  * Updated l.root-servers.net address, and added IPv6 addresses
+    (Closes: #463638).
+  * lintian cleanup:
+    - updated Standards-Version to latest revision.
+    - removed empty directory /usr/share/zonecheck for zonecheck-cgi.
+    - added missing dpatch comments.
+    - well-formed copyright notice.
+
+ -- Sebastien Delafond <seb@debian.org>  Fri, 22 Feb 2008 07:33:50 -0800
+
+zonecheck (2.0.4-7) unstable; urgency=low
+
+  * Included patch by Arnaud Cornet to allow for using a different name server than
+    what is in /etc/resolv.conf (Closes: #418029).
+  * Wrote patch to never use ruby-libxml even if it is installed (Closes: #407896).
+  
+ -- Sebastien Delafond <seb@debian.org>  Fri, 06 Apr 2007 11:05:54 -0700
+
+zonecheck (2.0.4-6) unstable; urgency=low
+
+  * Upgraded standards version to 3.7.2.
+  * Moved debhelper and dpatch from Build-Depends-Indep to
+    Build-Depends.
+  
+ -- Sebastien Delafond <seb@debian.org>  Thu, 15 Jun 2006 16:30:01 -0700
+
+zonecheck (2.0.4-5) unstable; urgency=low
+
+  * Changed maintainer to <seb@debian.org>.
+  * Changed build dependencies from Build-Depends to Build-Depends-Indep.
+  
+ -- Sebastien Delafond <seb@debian.org>  Mon, 06 Feb 2006 17:13:46 -0800
+
+zonecheck (2.0.4-4) unstable; urgency=low
+
+  * Removed unnecessary depends on libraries included in libruby1.8
+    (Closes: #326191).
+  * Upgraded standards-version to 3.6.2.1.
+
+ -- Sebastien Delafond <sdelafond@gmx.net>  Fri, 16 Sep 2005 15:37:52 -0700
+
+zonecheck (2.0.4-4) unstable; urgency=low
+
+  * Cleaned up debian/rules.
+
+ -- Sebastien Delafond <sdelafond@gmx.net>  Fri, 21 Jan 2005 15:59:47 -0800
+
+zonecheck (2.0.4-3) unstable; urgency=low	
+
+  * Added missing files to the installed documentation (Closes: #272964)
+  * Modified debian/rules to include /usr/share/dpatch/dpatch/make
+  * Patched doc/zonecheck.1 to escape '-' signs where needed (per 
+    http://lists.debian.org/debian-devel/2003/03/msg01481.html) and sent
+    patch to upstream.
+    Package is now lintian/linda clean.
+  * Renamed dpatch files
+  * Changed last incorrect timestamp in changelog.Debian
+  * Added note to README.Debian in zonecheck-cgi, poiting to documentation
+    in /usr/share/doc/zonecheck
+
+ -- Sebastien Delafond <sdelafond@gmx.net>  Wed, 22 Sep 2004 21:20:12 -0700
+
+zonecheck (2.0.4-2) unstable; urgency=low
+
+  * Fixed incorrect locale handling, sent patch to upstream (Closes: #272390)
+  * Add note to README.Debian in zonecheck-cgi, to state the new
+    location of the webfiles.
+	
+ -- Sebastien Delafond <sdelafond@gmx.net>  Wed, 17 Sep 2004 11:35:03 -0700
+
+zonecheck (2.0.4-1) unstable; urgency=low
+
+  * New maintainer. Closes: #270249
+  * New upstream release.
+  * Correctly installs web pages for zonecheck-cgi in /var/www/zonecheck.
+  * Uses dpatch.
+
+ -- Sebastien Delafond <sdelafond@gmx.net>  Wed, 15 Sep 2004 20:53:02 -0700
+
+zonecheck (2.0.3-2) unstable; urgency=low
+
+  * Formally orphaned. Maintainer set to QA. See bug #270249
+  * Installs the documentation. Closes: #238399
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Tue, 14 Sep 2004 15:45:23 +0200
+
+zonecheck (2.0.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Wed, 10 Mar 2004 14:08:05 +0100
+
+zonecheck (2.0.2-2) unstable; urgency=low
+
+  * Now depends on iputils-ping. (Closes: #231605)
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Sat,  7 Feb 2004 21:52:41 +0100
+
+zonecheck (2.0.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Mon, 19 Jan 2004 16:25:53 +0100
+
+zonecheck (2.0.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * First Debian official upload (Closes: #222388)
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Mon,  5 Jan 2004 10:16:27 +0100
+
+zonecheck (2.0.0-2) unstable; urgency=low
+
+  * Stupid bug in zonecheck-cgi (files copied in the wrong place) 
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Wed,  3 Dec 2003 16:16:20 +0100
+
+zonecheck (2.0.0-1) unstable; urgency=low
+
+  * New stable upstream release. Ready for upload.
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Tue,  2 Dec 2003 12:16:27 +0100
+
+zonecheck (0.1-1) unstable; urgency=low
+
+  * New upstream release 
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Thu, 13 Nov 2003 18:06:28 +0100
+
+zonecheck (0.0-2) unstable; urgency=low
+
+  * Fix a bug in ping's verbosity
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Thu, 13 Nov 2003 16:18:40 +0100
+
+zonecheck (0.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Stephane Bortzmeyer <bortzmeyer@debian.org>  Thu, 13 Nov 2003 13:28:02 +0100
+

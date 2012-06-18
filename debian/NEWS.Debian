@@ -1,0 +1,11 @@
+zonecheck (2.0.4-13) unstable; urgency=low
+
+  /var/www/zonecheck has been moved to /usr/share/zonecheck-cgi, as
+  packages should not install files in /var/www/ directly. Please
+  modify your webserver configuration accordingly, or just run:
+
+    ln -sf /usr/share/zonecheck-cgi /var/www/zonecheck
+
+ -- Sebastien Delafond <seb@debian.org>  Mon, 02 Jun 2008 11:47:32 -0700
+
+

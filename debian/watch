@@ -1,0 +1,3 @@
+version=3
+
+opts=pasv ftp://ftp.nic.fr/pub/mirror/zonecheck/src/zonecheck-(.*)\.tgz debian uupdate

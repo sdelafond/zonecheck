@@ -1,3 +1,10 @@
+zonecheck (3.0.3-3) unstable; urgency=low
+
+  * New IPv4 address for d.root-servers.net (Closes: #715479)
+  * Bump-up Standards revision
+
+ -- Sebastien Delafond <seb@debian.org>  Mon, 15 Jul 2013 11:17:55 +0200
+
 zonecheck (3.0.3-2) unstable; urgency=low
 
   * Fix problems related to ruby 1.9, thanks to patches from Antonio

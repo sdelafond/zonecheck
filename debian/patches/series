@@ -9,3 +9,4 @@
 #80_no-rubygems.patch
 94_yaml1_676173_fix.patch
 98_yaml2_676173_fix.patch
+99_update-rootservers_715479-fix.patch

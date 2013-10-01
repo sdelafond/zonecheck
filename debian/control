@@ -11,7 +11,7 @@ Vcs-Browser: http://anonscm.debian.org/git/collab-maint/zonecheck.git
 
 Package: zonecheck
 Architecture: all
-Depends: ruby (>= 1.8), iputils-ping, libdns-ruby (>= 1.47), ${misc:Depends}
+Depends: ruby (>= 1.8), iputils-ping, ruby-dnsruby (>= 1.47), ${misc:Depends}
 Recommends: libopenssl-ruby
 Description: DNS configuration checker
  DNS is a critical resource for every network application, so it is

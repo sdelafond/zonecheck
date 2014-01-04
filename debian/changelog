@@ -1,3 +1,14 @@
+zonecheck (3.0.5-1) unstable; urgency=log
+
+  * New upstream release
+  * Update watch file
+  * Bump-up Standards-Version
+  * Update man page patch for 3.0.5
+  * Register HTML documentation in doc-base
+  * Use build-arch and build-indep targets in debian/rules
+
+ -- Sébastien Delafond <seb@debian.org>  Sat, 04 Jan 2014 23:44:29 +0100
+
 zonecheck (3.0.3-5) unstable; urgency=low
 
   * Depend on ruby-dnsruby instead of libdns-ruby (Closes: #725074)

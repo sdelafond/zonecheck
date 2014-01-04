@@ -1,0 +1,8 @@
+Document: zonecheck
+Title: Zonecheck Manuel
+Abstract: This manual describes what zonecheck is, and how to use it
+Section: Network/Monitoring
+
+Format: HTML
+Files: /usr/share/doc/zonecheck/html/*.html
+Index: /usr/share/doc/zonecheck/html/index.html

@@ -7,7 +7,7 @@ zonecheck (3.0.5-1) unstable; urgency=log
   * Register HTML documentation in doc-base
   * Use build-arch and build-indep targets in debian/rules
 
- -- Sébastien Delafond <seb@debian.org>  Sat, 04 Jan 2014 23:44:29 +0100
+ -- Sebastien Delafond <seb@debian.org>  Sat, 04 Jan 2014 23:44:29 +0100
 
 zonecheck (3.0.3-5) unstable; urgency=low
 

@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" 
  "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd" 
 [
-<!ENTITY version "$Name: ZC-3_0_3 $">
+<!ENTITY version "$Name: ZC-3_0_5 $">
 <!ENTITY faq     SYSTEM "common/faq.xml">
 <!ENTITY config  SYSTEM "common/config.xml">
 <!ENTITY install SYSTEM "common/install.xml">

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE config PUBLIC "-//ZoneCheck//DTD Config V1.0//EN" "msgcat.dtd">
 <msgcat lang="en">
-<!-- $Id: cgi.en,v 1.15 2010/06/01 15:36:07 chabannf Exp $ -->
+<!-- $Id: cgi.en,v 1.16 2011/03/14 13:38:25 kmkaplan Exp $ -->
 
 <!--
 # 
@@ -9,8 +9,8 @@
 # AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 #
 # CREATED     : 2003/03/28 19:58:17
-# REVISION    : $Revision: 1.15 $ 
-# DATE        : $Date: 2010/06/01 15:36:07 $
+# REVISION    : $Revision: 1.16 $ 
+# DATE        : $Date: 2011/03/14 13:38:25 $
 #
 # CONTRIBUTORS: (see also CREDITS file)
 #
@@ -71,6 +71,7 @@ parameters:
      - chkmail (!mail)
      - chkrir  (!rir)
      - chkzone (!dns:axfr)
+ - ns-rdata = DS rdata
  - ns       = ns1=ip1,ip2;ns2=ip3;ns3
                (WARNING: in URL '%3b' should be used instead of ';')
      - ns0  .. nsX   = nameserver name

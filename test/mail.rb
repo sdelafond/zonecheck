@@ -1,13 +1,13 @@
 # ZCTEST 1.0
-# $Id: mail.rb,v 1.39 2010/06/07 08:51:25 chabannf Exp $
+# $Id: mail.rb,v 1.40 2010/10/22 14:21:22 bortzmeyer Exp $
 
 # 
 # CONTACT     : zonecheck@nic.fr
 # AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 #
 # CREATED     : 2002/09/25 19:14:21
-# REVISION    : $Revision: 1.39 $ 
-# DATE        : $Date: 2010/06/07 08:51:25 $
+# REVISION    : $Revision: 1.40 $ 
+# DATE        : $Date: 2010/10/22 14:21:22 $
 #
 # CONTRIBUTORS: (see also CREDITS file)
 #
@@ -223,7 +223,7 @@ module CheckExtra
 	# DESC:
 	def chk_mail_hostmaster_mx_cname
 	    rname = soa(bestresolverip).rname
-	    mdom  = rname
+	    mdom  = Dnsruby::Name::create(rname.labels[1..-1]) if rname.labels.size > 1
 	    mhost = bestmx(mdom)
 	    return true if mhost.nil?	# No MX
 	    ! is_cname?(mhost) 

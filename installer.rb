@@ -15,7 +15,7 @@ include FileUtils
 
 
 class Installer
-    CVS_NAME	= %q$Name: ZC-3_0_3 $
+    CVS_NAME	= %q$Name: ZC-3_0_5 $
     VERSION	= (Proc::new { 
 		       n = CVS_NAME.split[1]
 		       n = /^ZC-(.*)/.match(n) unless n.nil?

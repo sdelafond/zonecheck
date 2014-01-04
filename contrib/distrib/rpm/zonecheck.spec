@@ -1,6 +1,6 @@
 Summary: Perform consistency checks on DNS zones
 Name: zonecheck
-Version: 3.0.3
+Version: 3.0.5
 Release: 1
 License: GPL
 Group: Applications/Internet

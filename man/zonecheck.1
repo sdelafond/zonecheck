@@ -1,12 +1,12 @@
-.\" $Id: zonecheck.1,v 1.21 2010/06/03 08:09:28 chabannf Exp $
+.\" $Id: zonecheck.1,v 1.24 2011/03/11 16:09:17 kmkaplan Exp $
 .
 .\" 
 .\" CONTACT     : zonecheck@nic.fr
 .\" AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 .\"
 .\" CREATED     : 2003/08/26 10:20:35
-.\" REVISION    : $Revision: 1.21 $ 
-.\" DATE        : $Date: 2010/06/03 08:09:28 $
+.\" REVISION    : $Revision: 1.24 $ 
+.\" DATE        : $Date: 2011/03/11 16:09:17 $
 .\"
 .\" CONTRIBUTORS: (see also CREDITS file)
 .\"
@@ -186,11 +186,15 @@ This can give the following example: ns1;ns2=ip1,ip2;ns3=ip3
 \fB--securedelegation\fR, \fB-s\fR \fI[dsordnskey]\fR
 Force the execution of the full DNSSEC profile. Arguments are optional. 
 You can precise the Trust Anchor of your zone by giving the DNSKEY 
-or the DS and the algorithm used to hash your key. 
+or the DS and the algorithm used to hash your key. Several Trust
+Anchors can be specified, separated by commas (in that case, they _all_
+have to match.)
 .br
-This can give the following example: DNSKEY:af1Bs0F+4rg-g19,DS:eAg7P4J1qfMg:SHA1 
-or DS:eAg7P4J1qfMg:SHA1 
-or just DNSKEY:af1Bs0F+4rg-g19
+This can give the following example:
+  \fBDNSKEY:af1Bs0F+4rg-g19,DS:eAg7P4J1qfMg:SHA-1 \fP
+  \fBDS:eAg7P4J1qfMg:SHA-1\fP
+  \fBDS-RDATA:5991 8 2 46DB8A99F9125B1F88AAC74DF7EC3FFCCC13CE7412C3BEBB2CB93BED4A05A960\fP
+  \fBDNSKEY:af1Bs0F+4rg-g19\fP
 .
 .TP
 \fB--quiet\fR, \fB-q\fR

@@ -9,7 +9,7 @@ die()  { echo "ERROR: $1" ; exit   1; }
 info() { echo "$1"        ; return 1; }
 
 # Arguments
-[ -z "$1" ] && die "version requiered (ex: 2.0.0)"
+[ -z "$1" ] && die "version required (ex: 3.0.4)"
 
 dest=${2:-/dev/null}
 [ "${dest#/}" != ${dest} ] || dest=`pwd`/$dest
@@ -26,6 +26,10 @@ tarlatest=$module-latest.tgz
 
 info "Making ZoneCheck release $release"
 
+info "Did you update the ChangeLog (and commit!) to document the changes?"
+info "Type <Return> to confirm or Control-C to cancel: "
+read confirmation
+
 info "- setting CVSROOT"
 if [ -z "$CVSROOT" ]; then
     if [ -f CVS/Root ]; then
@@ -41,7 +45,7 @@ cd $tmp || die "unable to change directory to $tmp"
 
 info "- exporting from CVS with tag $cvstag"
 cvs -q export -r $cvstag $module ||
-    die "unable to export release tagged $cvstag"
+    die "unable to export release tagged $cvstag (may be your forgot to tag *before*?)"
 
 info "- generating documentation"
 (   mkdir -p $module/doc/html
@@ -74,8 +78,6 @@ rsync -av $tarname -e "ssh -p 2222" www.zonecheck.fr:/var/www/www.zonecheck.fr/h
 info "- cleaning"
 rm -Rf $tmp
 
-info "Do not forget to update www.zonecheck.fr:/var/www/www.zonecheck.fr/htdocs/lastnews.ihtml"
-
-info "Did you update the ChangeLog to document the changes?"
+info "Do not forget to update www.zonecheck.fr:/var/www/www.zonecheck.fr/htdocs/lastnews.ihtml and download.shtml"
 
 exit 0

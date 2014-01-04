@@ -1,12 +1,12 @@
-# $Id: param.rb,v 1.110 2010/10/04 09:29:50 rpaulmier Exp $
+# $Id: param.rb,v 1.115 2011/03/11 16:09:18 kmkaplan Exp $
 
 # 
 # CONTACT     : zonecheck@nic.fr
 # AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 #
 # CREATED     : 2002/08/02 13:58:17
-# REVISION    : $Revision: 1.110 $ 
-# DATE        : $Date: 2010/10/04 09:29:50 $
+# REVISION    : $Revision: 1.115 $ 
+# DATE        : $Date: 2011/03/11 16:09:18 $
 #
 # CONTRIBUTORS: (see also CREDITS file)
 #
@@ -180,7 +180,7 @@ module ZoneCheck
         return false if @ns_input.empty?
         # glue misused
         @ns_input.each { |ns, ips|
-          return false unless ns.subdomain_of?(@name) ^ ips.empty? }
+	  return false unless (ns == @name || ns.subdomain_of?(@name)) ^ ips.empty? }
         # ok
         true
       end
@@ -212,10 +212,6 @@ module ZoneCheck
              !(host_str =~ /^[A-Za-z0-9.-]+$/)
             raise ParamError, $mc.get("param:ns_name") % host_str
           end
-          unless ips_str =~ Dnsruby::IPv4::Regex ||
-             ips_str =~ Dnsruby::IPv6::Regex
-            raise ParamError, $mc.get("param:ns_ip") % ips_str
-          end
 
           # Canonicalize host names (final dot mandatory)
           host_str = host_str + '.' unless host_str =~ /.\.$/          
@@ -227,7 +223,7 @@ module ZoneCheck
               if str =~ Dnsruby::IPv6::Regex
                 ips << Dnsruby::IPv6::create(str)
               else
-                raise ArgumentError, 'Argument should be an address'
+                raise ArgumentError, "Argument #{str} should be an IP address" 
               end
             end
           }
@@ -910,21 +906,40 @@ module ZoneCheck
           array.each { |token|
             if token =~ /^DNSKEY:/
               token = token.gsub(/DNSKEY:/, '')
-              @domain.dnskey= Dnsruby::RR::DNSKEY.new()
-              @domain.dnskey.init_defaults
-              @domain.dnskey.key= token
-            end
-            if token =~ /^DS:/
+              rr = Dnsruby::RR::DNSKEY.new()
+              rr.init_defaults
+              rr.key = token
+              unless @domain.dnskey
+                @domain.dnskey = []
+              end
+              @domain.dnskey << rr
+            elsif token =~ /^DS:/
               token = token.gsub(/DS:/,'')
               ds = token.split(/\s*:\s*/)
               unless ds.size == 2
                 raise ParamError, 
                   "Syntax of DS argument should be DS:your_ds:the_hash_algorithm\n"
               end
-              @domain.ds= Dnsruby::RR::DS.new()
-              @domain.ds.init_defaults
-              @domain.ds.digest= ds[0]
-              @domain.ds.digest_type= ds[1]
+              rr = Dnsruby::RR::DS.new()
+              rr.init_defaults
+              rr.digest= ds[0]
+              rr.digest_type= ds[1]
+              rr.digestbin = [rr.digest].pack("H*")
+              unless @domain.ds
+                @domain.ds = []
+              end
+              @domain.ds << rr
+            elsif token =~ /^DS-RDATA:/
+              token = token.gsub(/DS-RDATA:/,'')
+              rr = Dnsruby::RR::DS.new()
+              rr.from_string(token)
+              unless @domain.ds
+                @domain.ds = []
+              end
+              @domain.ds << rr
+            else
+              raise ParamError,
+                "See man page for syntax of --securedelegation option"
             end
           }
         else

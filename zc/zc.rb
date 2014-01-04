@@ -101,7 +101,7 @@ ZC_IP_STACK		= ENV['ZC_IP_STACK'] || '46'
 #
 # Identification
 #
-ZC_CVS_NAME	= %q$Name: ZC-3_0_3 $
+ZC_CVS_NAME	= %q$Name: ZC-3_0_5 $
 ZC_NAME		= 'ZoneCheck'
 ZC_VERSION	= (Proc::new { 
 		       n = ZC_CVS_NAME.split[1]

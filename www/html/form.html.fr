@@ -560,7 +560,7 @@
 	     alt="Valid HTML 4.01!"></a>
     </span>
 
-Distribution: $Name: ZC-3_0_3 $ <br>
+Distribution: $Name: ZC-3_0_5 $ <br>
 <!-- Created: Fri Sep 27 16:34:31 CEST 2002 -->
 <!-- hhmts start -->
 Last modified: Wed Aug 25 16:26:08 CEST 2010

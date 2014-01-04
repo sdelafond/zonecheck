@@ -1,13 +1,13 @@
 # ZCTEST 1.0
-# $Id: dnssec.rb,v 1.9 2010/06/25 08:41:04 chabannf Exp $
+# $Id: dnssec.rb,v 1.11 2011/03/11 16:09:18 kmkaplan Exp $
 
 # 
 # CONTACT     : zonecheck@nic.fr
 # AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 #
 # CREATED     : 2002/08/02 13:58:17
-# REVISION    : $Revision: 1.9 $ 
-# DATE        : $Date: 2010/06/25 08:41:04 $
+# REVISION    : $Revision: 1.11 $ 
+# DATE        : $Date: 2011/03/11 16:09:18 $
 #
 # CONTRIBUTORS: (see also CREDITS file)
 #
@@ -209,48 +209,36 @@ module CheckDNSSEC
       end
       
       def chk_ds_and_dnskey_coherence(ns,ip)
-        if !(given_ds.nil?)
-          if !(given_dnskey.nil?)
-            given_dnskey.name = @domain.name
-            given_ds.name = @domain.name
-            
-            new_dnskey = nil
-            is_in_zone = false
-            dnskey(ip).each {|keytemp|
-              if keytemp.key == given_dnskey.key && keytemp.sep_key?
-                new_dnskey = keytemp
-                is_in_zone = true
-              end
-            }
-            return false unless is_in_zone && !(new_dnskey.nil?)
-            dstemp = Dnsruby::RR::DS.new()
-            dstemp.init_defaults
-            dstemp.name = @domain.name
-            dstemp.digest= dstemp.digest_key(new_dnskey,given_ds.digest_type).unpack("H*")[0]
-            unless (given_ds.digest.upcase == dstemp.digest.upcase)
-              return false
+        # Find all given DS otherwise return false
+        if given_ds && !given_ds.all? {|ds|
+            if ds.digest_type && ds.digestbin && ds.key_tag && ds.algorithm
+              dnskey(ip).detect {|keytemp|
+                ds.check_key(keytemp)
+              }
+            else
+              dnskey(ip).detect {|keytemp|
+                dstemp = Dnsruby::RR.create({ :name => @domain.name,
+                                              :type => Dnsruby::Types.DS,
+                                              :digest => ds.digest,
+                                              :digest_type => ds.digest_type,
+                                              :digestbin => ds.digestbin,
+                                              :key_tag => keytemp.key_tag,
+                                              :algorithm => keytemp.algorithm})
+                dstemp.check_key(keytemp)
+              }
             end
-            return true
-          else
-            dnskey(ip).each {|keytemp|
-              given_ds.name = @domain.name
-              dstemp = Dnsruby::RR::DS.from_key(keytemp, given_ds.digest_type)
-              if (given_ds.digest.upcase == dstemp.digest.upcase)
-                return true
-              else
-              end
-            }
-            return false
-          end
-        elsif !(given_dnskey.nil?)
-          given_dnskey.name = @domain.name
-          dnskey(ip).each {|keytemp|
-            return true if keytemp.key == given_dnskey.key && keytemp.sep_key?
           }
           return false
-        else
+        end
+        # Find all given DNSKEY otherwise return false
+        if given_dnskey && !given_dnskey.all? {|dnskey|
+            dnskey(ip).detect {|keytemp|
+              keytemp.key == dnskey.key && keytemp.sep_key?
+            }
+          }
           return false
         end
+        return true
       end
       
       def tst_dnssec_policy(ns,ip)

@@ -1,12 +1,12 @@
-# $Id: cgi.rb,v 1.64 2010/06/29 13:13:09 chabannf Exp $
+# $Id: cgi.rb,v 1.65 2011/03/14 13:38:25 kmkaplan Exp $
 
 # 
 # CONTACT     : zonecheck@nic.fr
 # AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 #
 # CREATED     : 2002/08/02 13:58:17
-# REVISION    : $Revision: 1.64 $ 
-# DATE        : $Date: 2010/06/29 13:13:09 $
+# REVISION    : $Revision: 1.65 $ 
+# DATE        : $Date: 2011/03/14 13:38:25 $
 #
 # CONTRIBUTORS: (see also CREDITS file)
 #
@@ -77,6 +77,7 @@ require 'param'
 ##      - chkmail (!mail)
 ##      - chkrir  (!rir)
 ##      - chkzone (!dns:axfr)
+##  - ds-rdata = DS rdata (<key-tag> <key-algorithm> <hash-algorithm> <hash>)
 ##  - ns       = ns1=ip1,ip2;ns2=ip3;ns3
 ##      - ns0  .. nsX   = nameserver name
 ##      - ips0 .. ipsX  = coma separated ip addresses
@@ -233,6 +234,14 @@ module Input
 	    
       # DNSSEC
 	    sd = [""]
+            if @cgi.has_key?('ds-rdata')
+                @cgi.params['ds-rdata'].each {|ds|
+                    if ds.include?(',')
+                        raise ParamError, "Invalid DS-RDATA"
+                    end
+                    sd << "DS-RDATA:" + ds unless ds.empty? unless ds.empty?
+                }
+            end
       if @cgi.has_key?('ds') && !@cgi.params['ds'].join("").empty?
         if @cgi.has_key?('ha')
           @cgi.params['ds'] = @cgi.params['ds'].join("").upcase

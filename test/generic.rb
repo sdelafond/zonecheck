@@ -1,13 +1,13 @@
 # ZCTEST 1.0
-# $Id: generic.rb,v 1.32 2010/06/09 13:05:21 chabannf Exp $
+# $Id: generic.rb,v 1.33 2011/03/08 14:07:26 kmkaplan Exp $
 
 # 
 # CONTACT     : zonecheck@nic.fr
 # AUTHOR      : Stephane D'Alu <sdalu@nic.fr>
 #
 # CREATED     : 2002/08/02 13:58:17
-# REVISION    : $Revision: 1.32 $ 
-# DATE        : $Date: 2010/06/09 13:05:21 $
+# REVISION    : $Revision: 1.33 $ 
+# DATE        : $Date: 2011/03/08 14:07:26 $
 #
 # CONTRIBUTORS: (see also CREDITS file)
 #
@@ -249,7 +249,7 @@ module CheckGeneric
       rr.ttl = dummyttl
       rr.name = @domain.name
       msg.add_answer(rr)
-      if ns.subdomain_of?(@domain.name)
+      if ns == @domain.name || ns.subdomain_of?(@domain.name)
            ips.each { |ip|
              
              if ip.class == Dnsruby::IPv4

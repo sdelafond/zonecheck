@@ -138,9 +138,9 @@ Index: zonecheck-3.0.0/man/zonecheck.1
 +\fB\-\-securedelegation\fR, \fB\-s\fR \fI[dsordnskey]\fR
  Force the execution of the full DNSSEC profile. Arguments are optional. 
  You can precise the Trust Anchor of your zone by giving the DNSKEY 
- or the DS and the algorithm used to hash your key. 
+ or the DS and the algorithm used to hash your key. Several Trust
 @@ -193,20 +193,20 @@
- or just DNSKEY:af1Bs0F+4rg-g19
+   \fBDNSKEY:af1Bs0F+4rg-g19\fP
  .
  .TP
 -\fB--quiet\fR, \fB-q\fR

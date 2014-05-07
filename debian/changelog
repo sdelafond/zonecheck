@@ -1,4 +1,11 @@
-zonecheck (3.0.5-1) unstable; urgency=log
+zonecheck (3.0.5-2) unstable; urgency=low
+
+  * Change "Manuel" to "Manual", and add missing trailing newline
+    (Closes: #747325)
+
+ -- Sebastien Delafond <seb@debian.org>  Wed, 07 May 2014 16:33:16 +0200
+
+zonecheck (3.0.5-1) unstable; urgency=low
 
   * New upstream release
   * Update watch file

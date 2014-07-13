@@ -1,3 +1,10 @@
+zonecheck (3.0.5-3) unstable; urgency=medium
+
+  * Make the HTML doc a bit more friendly (Closes: #741560)
+  * Provide an Apache config snippet for zonecheck-cgi (Closes: #741562)
+
+ -- Sebastien Delafond <seb@debian.org>  Sun, 13 Jul 2014 12:11:31 +0200
+
 zonecheck (3.0.5-2) unstable; urgency=low
 
   * Change "Manuel" to "Manual", and add missing trailing newline

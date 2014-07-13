@@ -63,6 +63,7 @@ binary-indep: build install
 	mv $(CURDIR)/debian/zonecheck/usr/share/doc/zonecheck/html/index.html  $(CURDIR)/debian/zonecheck/usr/share/doc/zonecheck/html/index-header.html
 	mv $(CURDIR)/debian/zonecheck/usr/share/doc/zonecheck/html/index-toc.html  $(CURDIR)/debian/zonecheck/usr/share/doc/zonecheck/html/index.html
 	dh_installdocs -p zonecheck-cgi debian/NEWS.Debian doc/apache.conf
+	dh_installdocs -p zonecheck-cgi debian/NEWS.Debian doc/apache.conf
 	dh_installexamples
 	dh_installman
 	dh_compress

@@ -1,17 +1,15 @@
 zonecheck-cgi for Debian
 ------------------------
 
-Note that as of 2.0.4-1, as opposed to a "classic" (non-Debian)
-install of zonecheck-cgi, the web files (HTML files, CSS stylesheets,
-images, etc...) will be installed under /var/www/zonecheck.
+The cgi-bin script is linked from its original location to
+/usr/lib/cgi-bin/, the default Debian location.
 
-The cgi-bin script will also be linked from its original location to
-/usr/lib/cgi-bin/, the default Debian location. This should be fine in
-a default Debian install where SymLinksIfOwnerMatch is set on
-<Directory /usr/lib/cgi-bin/>.
+An Apache config snippet is included at the following location:
+
+  /usr/share/doc/zonecheck-cgi/apache.conf
 
 Any documentation that you might need can be found under
 /usr/share/doc/zonecheck, and is not duplicated under 
 /usr/share/doc/zonecheck-cgi
 
- -- Sebastien Delafond <sdelafond@gmx.net>  Wed, 22 Sep 2004 21:42:16 -0700
+ -- Sebastien Delafond <seb@debian.org>, Sun, 13 Jul 2014 11:58:27 +0200

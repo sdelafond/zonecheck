@@ -2,6 +2,7 @@
 20locale-rb.patch
 #25param-rb.patch
 30webpages.patch
+35_apache-conf.patch
 40man-1.patch
 50_libxml_407896-fix.patch
 #60_update-rootservers_463638-fix.patch

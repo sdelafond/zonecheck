@@ -6,8 +6,8 @@ Build-Depends-Indep: ruby (>= 1.8)
 Build-Depends: debhelper (>= 6.0.0)
 Standards-Version: 3.9.5
 Homepage: http://www.zonecheck.fr
-Vcs-Git: git://anonscm.debian.org/collab-maint/zonecheck.git
-Vcs-Browser: http://anonscm.debian.org/git/collab-maint/zonecheck.git
+Vcs-Git: https://salsa.debian.org/debian/zonecheck.git
+Vcs-Browser: https://salsa.debian.org/debian/zonecheck
 
 Package: zonecheck
 Architecture: all
